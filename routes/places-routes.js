@@ -16,7 +16,13 @@ check('address').not().isEmpty()
 ],
 placesControllers.createPlace);
 
-router.patch('/:pid', placesControllers.updatePlace);
+router.patch( [
+    check('title')
+      .not()
+      .isEmpty(),
+    check('description').isLength({ min: 5 })
+  ],
+  placesControllers.updatePlace);
 
 router.delete('/:pid', placesControllers.deletePlace);
 
